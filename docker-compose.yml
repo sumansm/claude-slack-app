@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  slack-bot:
+    build: .
+    container_name: slack-claude-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge
